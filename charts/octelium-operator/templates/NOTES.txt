@@ -1,0 +1,12 @@
+The Octelium operator is installed in {{ .Release.Namespace }}.
+
+Check its rollout:
+  kubectl rollout status deployment/{{ include "octelium-operator.fullname" . }} -n {{ .Release.Namespace }}
+
+Create an Octelium connection CR with its resource-server endpoint and credentials,
+then apply managed resources referencing that connection with octeliumRef.
+{{- if .Values.spiffe.enabled }}
+
+SPIFFE CSI mounting is enabled. SPIRE workload registration must cover this
+namespace and ServiceAccount {{ include "octelium-operator.serviceAccountName" . }}.
+{{- end }}

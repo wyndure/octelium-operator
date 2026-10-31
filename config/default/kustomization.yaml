@@ -1,0 +1,10 @@
+namespace: octelium-operator
+namePrefix: octelium-operator-
+resources:
+- ../crd
+- ../rbac
+- ../manager
+images:
+- name: controller
+  newName: ghcr.io/wyndure/octelium-operator
+  newTag: dev

@@ -1,0 +1,2669 @@
+# Generated from Kubebuilder markers and upstream protobuf descriptors. DO NOT EDIT.
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.22.0
+  name: octeliumservices.core.octelium.wyndure.com
+spec:
+  group: core.octelium.wyndure.com
+  names:
+    kind: OcteliumService
+    listKind: OcteliumServiceList
+    plural: octeliumservices
+    singular: octeliumservice
+  scope: Namespaced
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: Ready
+      type: string
+    name: v1
+    schema:
+      openAPIV3Schema:
+        description: OcteliumService uses the upstream specification without a copied
+          Go schema.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          metadataConfigMap:
+            description: MetadataConfigMap names a ConfigMap in this CR's namespace
+              for upstream metadata.
+            maxLength: 253
+            minLength: 1
+            pattern: ^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$
+            type: string
+          octelium:
+            description: ResourceOptions holds metadata without a Kubernetes equivalent
+              and create-only bootstrap state.
+            properties:
+              data:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              dataFromSecret:
+                description: SecretDataSource keeps sensitive values in native Kubernetes
+                  Secrets.
+                properties:
+                  key:
+                    type: string
+                  name:
+                    type: string
+                  namespace:
+                    description: Namespace defaults to the managed resource namespace.
+                    type: string
+                required:
+                - key
+                - name
+                type: object
+              deletionPolicy:
+                description: DeletionPolicy defaults to Delete; Retain leaves the
+                  external resource in place.
+                enum:
+                - Delete
+                - Retain
+                type: string
+              initialStatus:
+                description: InitialStatus is only used when creating a resource.
+                  Runtime status is observed, never overwritten.
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              metadata:
+                properties:
+                  actorOperation:
+                    type: string
+                  actorRef:
+                    properties:
+                      apiVersion:
+                        type: string
+                      kind:
+                        type: string
+                      name:
+                        type: string
+                      resourceVersion:
+                        type: string
+                      uid:
+                        type: string
+                    type: object
+                  createdAt:
+                    format: date-time
+                    type: string
+                  description:
+                    type: string
+                  displayName:
+                    type: string
+                  isSystem:
+                    type: boolean
+                  isSystemHidden:
+                    type: boolean
+                  isUserHidden:
+                    type: boolean
+                  lastResourceVersion:
+                    type: string
+                  picURL:
+                    type: string
+                  resourceVersion:
+                    type: string
+                  specLabels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  systemLabels:
+                    additionalProperties:
+                      type: string
+                    type: object
+                  tags:
+                    items:
+                      type: string
+                    type: array
+                  uid:
+                    type: string
+                  updatedAt:
+                    format: date-time
+                    type: string
+                type: object
+            type: object
+          octeliumRef:
+            description: OcteliumReference identifies a namespaced connection. An
+              omitted namespace means the resource's own namespace.
+            properties:
+              apiVersion:
+                default: octelium.wyndure.com/v1
+                enum:
+                - octelium.wyndure.com/v1
+                type: string
+              kind:
+                default: Octelium
+                enum:
+                - Octelium
+                type: string
+              name:
+                minLength: 1
+                type: string
+              namespace:
+                type: string
+            required:
+            - name
+            type: object
+          spec:
+            properties:
+              attrs:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+              authorization:
+                properties:
+                  enableAnonymous:
+                    type: boolean
+                  inlinePolicies:
+                    items:
+                      properties:
+                        name:
+                          type: string
+                        spec:
+                          properties:
+                            attrs:
+                              type: object
+                              x-kubernetes-preserve-unknown-fields: true
+                            enforcementRules:
+                              items:
+                                properties:
+                                  condition:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  effect:
+                                    type: string
+                                type: object
+                              type: array
+                            isDisabled:
+                              type: boolean
+                            rules:
+                              items:
+                                properties:
+                                  condition:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  effect:
+                                    type: string
+                                  name:
+                                    type: string
+                                  priority:
+                                    type: integer
+                                type: object
+                              type: array
+                          type: object
+                      type: object
+                    type: array
+                  policies:
+                    items:
+                      type: string
+                    type: array
+                type: object
+              config:
+                properties:
+                  clientCertificate:
+                    properties:
+                      fromSecret:
+                        type: string
+                      trustedCAs:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  http:
+                    properties:
+                      auth:
+                        properties:
+                          basic:
+                            properties:
+                              password:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              username:
+                                type: string
+                            type: object
+                          bearer:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                          custom:
+                            properties:
+                              header:
+                                type: string
+                              value:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          oauth2ClientCredentials:
+                            properties:
+                              clientID:
+                                type: string
+                              clientSecret:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              scopes:
+                                items:
+                                  type: string
+                                type: array
+                              tokenURL:
+                                type: string
+                            type: object
+                          sigv4:
+                            properties:
+                              accessKeyID:
+                                type: string
+                              region:
+                                type: string
+                              secretAccessKey:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              service:
+                                type: string
+                            type: object
+                        type: object
+                      body:
+                        properties:
+                          maxRequestSize:
+                            type: integer
+                          mode:
+                            type: string
+                          validation:
+                            properties:
+                              jsonSchema:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                        type: object
+                      cors:
+                        properties:
+                          allowClusterServices:
+                            type: boolean
+                          allowCredentials:
+                            type: boolean
+                          allowHeaders:
+                            type: string
+                          allowMethods:
+                            type: string
+                          allowOriginStringMatch:
+                            items:
+                              type: string
+                            type: array
+                          exposeHeaders:
+                            type: string
+                          maxAge:
+                            type: string
+                        type: object
+                      enableRequestBuffering:
+                        type: boolean
+                      header:
+                        properties:
+                          addRequestHeaders:
+                            items:
+                              properties:
+                                append:
+                                  type: boolean
+                                eval:
+                                  type: string
+                                key:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          addResponseHeaders:
+                            items:
+                              properties:
+                                append:
+                                  type: boolean
+                                eval:
+                                  type: string
+                                key:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          authorizationMode:
+                            type: string
+                          forwardedMode:
+                            type: string
+                          host:
+                            properties:
+                              eval:
+                                type: string
+                              preserve:
+                                type: boolean
+                              value:
+                                type: string
+                            type: object
+                          removeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          removeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      isUpstreamHTTP2:
+                        type: boolean
+                      listenHTTP2:
+                        type: boolean
+                      path:
+                        properties:
+                          addPrefix:
+                            type: string
+                          removePrefix:
+                            type: string
+                        type: object
+                      plugins:
+                        items:
+                          properties:
+                            cache:
+                              properties:
+                                allowUnsafeMethods:
+                                  type: boolean
+                                key:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                maxSize:
+                                  type: integer
+                                ttl:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                useXCacheHeader:
+                                  type: boolean
+                              type: object
+                            condition:
+                              properties:
+                                all:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                any:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                match:
+                                  type: string
+                                matchAny:
+                                  type: boolean
+                                none:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                not:
+                                  type: string
+                                opa:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            direct:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                statusCode:
+                                  type: integer
+                              type: object
+                            extProc:
+                              properties:
+                                address:
+                                  type: string
+                                container:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                messageTimeout:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                processingMode:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            isDisabled:
+                              type: boolean
+                            jsonSchema:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                inline:
+                                  type: string
+                                statusCode:
+                                  type: integer
+                              type: object
+                            lua:
+                              properties:
+                                inline:
+                                  type: string
+                              type: object
+                            name:
+                              type: string
+                            path:
+                              properties:
+                                addPrefix:
+                                  type: string
+                                removePrefix:
+                                  type: string
+                              type: object
+                            phase:
+                              type: string
+                            rateLimit:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                key:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                limit:
+                                  type: integer
+                                statusCode:
+                                  type: integer
+                                window:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                          type: object
+                        type: array
+                      response:
+                        properties:
+                          direct:
+                            properties:
+                              contentType:
+                                type: string
+                              inline:
+                                type: string
+                              inlineBytes:
+                                type: string
+                              statusCode:
+                                type: integer
+                            type: object
+                        type: object
+                      retry:
+                        properties:
+                          initialInterval:
+                            properties:
+                              days:
+                                type: integer
+                              hours:
+                                type: integer
+                              milliseconds:
+                                type: integer
+                              minutes:
+                                type: integer
+                              months:
+                                type: integer
+                              seconds:
+                                type: integer
+                              weeks:
+                                type: integer
+                            type: object
+                          maxElapsedTime:
+                            properties:
+                              days:
+                                type: integer
+                              hours:
+                                type: integer
+                              milliseconds:
+                                type: integer
+                              minutes:
+                                type: integer
+                              months:
+                                type: integer
+                              seconds:
+                                type: integer
+                              weeks:
+                                type: integer
+                            type: object
+                          maxInterval:
+                            properties:
+                              days:
+                                type: integer
+                              hours:
+                                type: integer
+                              milliseconds:
+                                type: integer
+                              minutes:
+                                type: integer
+                              months:
+                                type: integer
+                              seconds:
+                                type: integer
+                              weeks:
+                                type: integer
+                            type: object
+                          maxRetries:
+                            type: integer
+                          multiplier:
+                            type: number
+                          retryOnServerErrors:
+                            type: boolean
+                          statusCodes:
+                            items:
+                              type: integer
+                            type: array
+                        type: object
+                      visibility:
+                        properties:
+                          enableRequestBody:
+                            type: boolean
+                          enableRequestBodyMap:
+                            type: boolean
+                          enableResponseBody:
+                            type: boolean
+                          enableResponseBodyMap:
+                            type: boolean
+                          excludeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          excludeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                          includeAllRequestHeaders:
+                            type: boolean
+                          includeAllResponseHeaders:
+                            type: boolean
+                          includeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          includeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  kubernetes:
+                    properties:
+                      bearerToken:
+                        properties:
+                          fromSecret:
+                            type: string
+                          trustedCAs:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      clientCertificate:
+                        properties:
+                          fromSecret:
+                            type: string
+                          trustedCAs:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      kubeconfig:
+                        properties:
+                          context:
+                            type: string
+                          fromSecret:
+                            type: string
+                        type: object
+                    type: object
+                  llm:
+                    properties:
+                      auth:
+                        properties:
+                          basic:
+                            properties:
+                              password:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              username:
+                                type: string
+                            type: object
+                          bearer:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                          custom:
+                            properties:
+                              header:
+                                type: string
+                              value:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          oauth2ClientCredentials:
+                            properties:
+                              clientID:
+                                type: string
+                              clientSecret:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              scopes:
+                                items:
+                                  type: string
+                                type: array
+                              tokenURL:
+                                type: string
+                            type: object
+                          sigv4:
+                            properties:
+                              accessKeyID:
+                                type: string
+                              region:
+                                type: string
+                              secretAccessKey:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              service:
+                                type: string
+                            type: object
+                        type: object
+                      cors:
+                        properties:
+                          allowClusterServices:
+                            type: boolean
+                          allowCredentials:
+                            type: boolean
+                          allowHeaders:
+                            type: string
+                          allowMethods:
+                            type: string
+                          allowOriginStringMatch:
+                            items:
+                              type: string
+                            type: array
+                          exposeHeaders:
+                            type: string
+                          maxAge:
+                            type: string
+                        type: object
+                      embedding:
+                        properties:
+                          dimensions:
+                            type: integer
+                          model:
+                            type: string
+                          source:
+                            properties:
+                              currentUpstream:
+                                type: boolean
+                              upstream:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                        type: object
+                      header:
+                        properties:
+                          addRequestHeaders:
+                            items:
+                              properties:
+                                append:
+                                  type: boolean
+                                eval:
+                                  type: string
+                                key:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          addResponseHeaders:
+                            items:
+                              properties:
+                                append:
+                                  type: boolean
+                                eval:
+                                  type: string
+                                key:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          authorizationMode:
+                            type: string
+                          forwardedMode:
+                            type: string
+                          host:
+                            properties:
+                              eval:
+                                type: string
+                              preserve:
+                                type: boolean
+                              value:
+                                type: string
+                            type: object
+                          removeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          removeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      isUpstreamHTTP2:
+                        type: boolean
+                      limits:
+                        properties:
+                          maxEstimatedInputTokens:
+                            type: integer
+                          maxOutputTokens:
+                            type: integer
+                          maxRequestBytes:
+                            type: integer
+                          maxStreamEventBytes:
+                            type: integer
+                          maxToolSchemaBytes:
+                            type: integer
+                          maxTools:
+                            type: integer
+                        type: object
+                      listenHTTP2:
+                        type: boolean
+                      model:
+                        properties:
+                          eval:
+                            type: string
+                          opa:
+                            type: string
+                          value:
+                            type: string
+                        type: object
+                      path:
+                        properties:
+                          addPrefix:
+                            type: string
+                          removePrefix:
+                            type: string
+                        type: object
+                      plugins:
+                        items:
+                          properties:
+                            condition:
+                              properties:
+                                all:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                any:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                match:
+                                  type: string
+                                matchAny:
+                                  type: boolean
+                                none:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                not:
+                                  type: string
+                                opa:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            direct:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                statusCode:
+                                  type: integer
+                              type: object
+                            extProc:
+                              properties:
+                                address:
+                                  type: string
+                                container:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                messageTimeout:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                processingMode:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            guardrail:
+                              properties:
+                                denyMessage:
+                                  type: string
+                                leg:
+                                  type: string
+                                patterns:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                scopes:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            isDisabled:
+                              type: boolean
+                            jsonSchema:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                inline:
+                                  type: string
+                                statusCode:
+                                  type: integer
+                              type: object
+                            lua:
+                              properties:
+                                inline:
+                                  type: string
+                              type: object
+                            model:
+                              properties:
+                                eval:
+                                  type: string
+                                opa:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            name:
+                              type: string
+                            path:
+                              properties:
+                                addPrefix:
+                                  type: string
+                                removePrefix:
+                                  type: string
+                              type: object
+                            phase:
+                              type: string
+                            prompt:
+                              properties:
+                                message:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                system:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            rateLimit:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                key:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                limit:
+                                  type: integer
+                                statusCode:
+                                  type: integer
+                                window:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            reasoning:
+                              properties:
+                                effort:
+                                  type: string
+                                eval:
+                                  type: string
+                                level:
+                                  type: string
+                                opa:
+                                  type: string
+                                tokenBudget:
+                                  type: integer
+                              type: object
+                            semanticCache:
+                              properties:
+                                embedding:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                maxSize:
+                                  type: integer
+                                minSimilarity:
+                                  type: number
+                                scope:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                ttl:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                useXCacheHeader:
+                                  type: boolean
+                              type: object
+                            semanticRouter:
+                              properties:
+                                embedding:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                fallbackModel:
+                                  type: string
+                                minSimilarity:
+                                  type: number
+                                routes:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                            tokenRateLimit:
+                              properties:
+                                defaultOutputTokens:
+                                  type: integer
+                                denyMessage:
+                                  type: string
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                key:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                limit:
+                                  type: integer
+                                scope:
+                                  type: string
+                                window:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            tools:
+                              properties:
+                                choice:
+                                  type: string
+                                denyMessage:
+                                  type: string
+                                filters:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                tools:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                          type: object
+                        type: array
+                      protocol:
+                        type: string
+                      reasoning:
+                        properties:
+                          effort:
+                            type: string
+                          eval:
+                            type: string
+                          level:
+                            type: string
+                          opa:
+                            type: string
+                          tokenBudget:
+                            type: integer
+                        type: object
+                      translation:
+                        properties:
+                          defaultMaxOutputTokens:
+                            type: integer
+                          upstreamProtocol:
+                            type: string
+                        type: object
+                      visibility:
+                        properties:
+                          enableRequestBody:
+                            type: boolean
+                          enableRequestBodyMap:
+                            type: boolean
+                          enableResponseBody:
+                            type: boolean
+                          enableResponseBodyMap:
+                            type: boolean
+                          excludeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          excludeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                          includeAllRequestHeaders:
+                            type: boolean
+                          includeAllResponseHeaders:
+                            type: boolean
+                          includeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          includeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  mcp:
+                    properties:
+                      auth:
+                        properties:
+                          basic:
+                            properties:
+                              password:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              username:
+                                type: string
+                            type: object
+                          bearer:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                          custom:
+                            properties:
+                              header:
+                                type: string
+                              value:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          oauth2ClientCredentials:
+                            properties:
+                              clientID:
+                                type: string
+                              clientSecret:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              scopes:
+                                items:
+                                  type: string
+                                type: array
+                              tokenURL:
+                                type: string
+                            type: object
+                          sigv4:
+                            properties:
+                              accessKeyID:
+                                type: string
+                              region:
+                                type: string
+                              secretAccessKey:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              service:
+                                type: string
+                            type: object
+                        type: object
+                      cors:
+                        properties:
+                          allowClusterServices:
+                            type: boolean
+                          allowCredentials:
+                            type: boolean
+                          allowHeaders:
+                            type: string
+                          allowMethods:
+                            type: string
+                          allowOriginStringMatch:
+                            items:
+                              type: string
+                            type: array
+                          exposeHeaders:
+                            type: string
+                          maxAge:
+                            type: string
+                        type: object
+                      disableOriginCheck:
+                        type: boolean
+                      endpoint:
+                        type: string
+                      header:
+                        properties:
+                          addRequestHeaders:
+                            items:
+                              properties:
+                                append:
+                                  type: boolean
+                                eval:
+                                  type: string
+                                key:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          addResponseHeaders:
+                            items:
+                              properties:
+                                append:
+                                  type: boolean
+                                eval:
+                                  type: string
+                                key:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          authorizationMode:
+                            type: string
+                          forwardedMode:
+                            type: string
+                          host:
+                            properties:
+                              eval:
+                                type: string
+                              preserve:
+                                type: boolean
+                              value:
+                                type: string
+                            type: object
+                          removeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          removeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      isUpstreamHTTP2:
+                        type: boolean
+                      limits:
+                        properties:
+                          maxRequestBytes:
+                            type: integer
+                          maxStreamEventBytes:
+                            type: integer
+                        type: object
+                      listenHTTP2:
+                        type: boolean
+                      path:
+                        properties:
+                          addPrefix:
+                            type: string
+                          removePrefix:
+                            type: string
+                        type: object
+                      plugins:
+                        items:
+                          properties:
+                            condition:
+                              properties:
+                                all:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                any:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                match:
+                                  type: string
+                                matchAny:
+                                  type: boolean
+                                none:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                not:
+                                  type: string
+                                opa:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            direct:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                statusCode:
+                                  type: integer
+                              type: object
+                            extProc:
+                              properties:
+                                address:
+                                  type: string
+                                container:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                messageTimeout:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                processingMode:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            guardrail:
+                              properties:
+                                denyMessage:
+                                  type: string
+                                leg:
+                                  type: string
+                                patterns:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                scopes:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            isDisabled:
+                              type: boolean
+                            jsonSchema:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                inline:
+                                  type: string
+                                statusCode:
+                                  type: integer
+                              type: object
+                            lua:
+                              properties:
+                                inline:
+                                  type: string
+                              type: object
+                            name:
+                              type: string
+                            path:
+                              properties:
+                                addPrefix:
+                                  type: string
+                                removePrefix:
+                                  type: string
+                              type: object
+                            phase:
+                              type: string
+                            rateLimit:
+                              properties:
+                                body:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                headers:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                key:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                limit:
+                                  type: integer
+                                statusCode:
+                                  type: integer
+                                window:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                          type: object
+                        type: array
+                      protocol:
+                        properties:
+                          rejectUnknownMethods:
+                            type: boolean
+                          requireVersion:
+                            type: boolean
+                          versions:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      visibility:
+                        properties:
+                          disableRequestBody:
+                            type: boolean
+                          disableResponseBody:
+                            type: boolean
+                          excludeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          excludeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                          includeAllRequestHeaders:
+                            type: boolean
+                          includeAllResponseHeaders:
+                            type: boolean
+                          includeRequestHeaders:
+                            items:
+                              type: string
+                            type: array
+                          includeResponseHeaders:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  mysql:
+                    properties:
+                      auth:
+                        properties:
+                          password:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                        type: object
+                      authorization:
+                        properties:
+                          mode:
+                            type: string
+                        type: object
+                      database:
+                        type: string
+                      isTLS:
+                        type: boolean
+                      user:
+                        type: string
+                      visibility:
+                        properties:
+                          disableQuery:
+                            type: boolean
+                        type: object
+                    type: object
+                  name:
+                    type: string
+                  parent:
+                    type: string
+                  postgres:
+                    properties:
+                      auth:
+                        properties:
+                          password:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                        type: object
+                      authorization:
+                        properties:
+                          mode:
+                            type: string
+                        type: object
+                      database:
+                        type: string
+                      sslMode:
+                        type: string
+                      user:
+                        type: string
+                      visibility:
+                        properties:
+                          disableQuery:
+                            type: boolean
+                        type: object
+                    type: object
+                  rdp:
+                    properties:
+                      auth:
+                        properties:
+                          domain:
+                            type: string
+                          password:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                          user:
+                            type: string
+                        type: object
+                      upstreamTLS:
+                        properties:
+                          allowAnyCert:
+                            type: boolean
+                          pinnedCertSHA256:
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  socks5:
+                    properties:
+                      auth:
+                        properties:
+                          noAuth:
+                            type: boolean
+                          usernamePassword:
+                            properties:
+                              password:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              username:
+                                type: string
+                            type: object
+                        type: object
+                      isEmbeddedMode:
+                        type: boolean
+                    type: object
+                  ssh:
+                    properties:
+                      auth:
+                        properties:
+                          password:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                          privateKey:
+                            properties:
+                              fromSecret:
+                                type: string
+                            type: object
+                        type: object
+                      eSSHMode:
+                        type: boolean
+                      enableLocalPortForwarding:
+                        type: boolean
+                      enableSubsystem:
+                        type: boolean
+                      upstreamHostKey:
+                        properties:
+                          insecureIgnoreHostKey:
+                            type: boolean
+                          key:
+                            type: string
+                        type: object
+                      user:
+                        type: string
+                      visibility:
+                        properties:
+                          disableSessionRecording:
+                            type: boolean
+                          enableSessionStdinRecording:
+                            type: boolean
+                        type: object
+                    type: object
+                  tls:
+                    properties:
+                      appendToSystemPool:
+                        type: boolean
+                      clientCertificate:
+                        properties:
+                          fromSecret:
+                            type: string
+                        type: object
+                      insecureSkipVerify:
+                        type: boolean
+                      trustedCAs:
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  upstream:
+                    properties:
+                      container:
+                        properties:
+                          args:
+                            items:
+                              type: string
+                            type: array
+                          command:
+                            items:
+                              type: string
+                            type: array
+                          credentials:
+                            properties:
+                              usernamePassword:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          env:
+                            items:
+                              properties:
+                                fromSecret:
+                                  type: string
+                                kubernetesSecretRef:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                name:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            type: array
+                          image:
+                            type: string
+                          livenessProbe:
+                            properties:
+                              failureThreshold:
+                                type: integer
+                              grpc:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              httpGet:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              initialDelaySeconds:
+                                type: integer
+                              periodSeconds:
+                                type: integer
+                              successThreshold:
+                                type: integer
+                              tcpSocket:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              timeoutSeconds:
+                                type: integer
+                            type: object
+                          port:
+                            type: integer
+                          readinessProbe:
+                            properties:
+                              failureThreshold:
+                                type: integer
+                              grpc:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              httpGet:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              initialDelaySeconds:
+                                type: integer
+                              periodSeconds:
+                                type: integer
+                              successThreshold:
+                                type: integer
+                              tcpSocket:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              timeoutSeconds:
+                                type: integer
+                            type: object
+                          replicas:
+                            type: integer
+                          resourceLimit:
+                            properties:
+                              cpu:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              ext:
+                                additionalProperties:
+                                  type: string
+                                type: object
+                              memory:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                            type: object
+                          securityContext:
+                            properties:
+                              capabilities:
+                                type: object
+                                x-kubernetes-preserve-unknown-fields: true
+                              readOnlyRootFilesystem:
+                                type: boolean
+                              runAsUser:
+                                type: integer
+                            type: object
+                          volumeMounts:
+                            items:
+                              properties:
+                                mountPath:
+                                  type: string
+                                name:
+                                  type: string
+                                readOnly:
+                                  type: boolean
+                                subPath:
+                                  type: string
+                              type: object
+                            type: array
+                          volumes:
+                            items:
+                              properties:
+                                emptyDir:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                name:
+                                  type: string
+                                persistentVolumeClaim:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            type: array
+                        type: object
+                      loadbalance:
+                        properties:
+                          endpoints:
+                            items:
+                              properties:
+                                url:
+                                  type: string
+                                user:
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      url:
+                        type: string
+                      user:
+                        type: string
+                    type: object
+                type: object
+              deployment:
+                properties:
+                  replicas:
+                    type: integer
+                type: object
+              dynamicConfig:
+                properties:
+                  configs:
+                    items:
+                      properties:
+                        clientCertificate:
+                          properties:
+                            fromSecret:
+                              type: string
+                            trustedCAs:
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                        http:
+                          properties:
+                            auth:
+                              properties:
+                                basic:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                bearer:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                custom:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                oauth2ClientCredentials:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                sigv4:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            body:
+                              properties:
+                                maxRequestSize:
+                                  type: integer
+                                mode:
+                                  type: string
+                                validation:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            cors:
+                              properties:
+                                allowClusterServices:
+                                  type: boolean
+                                allowCredentials:
+                                  type: boolean
+                                allowHeaders:
+                                  type: string
+                                allowMethods:
+                                  type: string
+                                allowOriginStringMatch:
+                                  items:
+                                    type: string
+                                  type: array
+                                exposeHeaders:
+                                  type: string
+                                maxAge:
+                                  type: string
+                              type: object
+                            enableRequestBuffering:
+                              type: boolean
+                            header:
+                              properties:
+                                addRequestHeaders:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                addResponseHeaders:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                authorizationMode:
+                                  type: string
+                                forwardedMode:
+                                  type: string
+                                host:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                removeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                removeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            isUpstreamHTTP2:
+                              type: boolean
+                            listenHTTP2:
+                              type: boolean
+                            path:
+                              properties:
+                                addPrefix:
+                                  type: string
+                                removePrefix:
+                                  type: string
+                              type: object
+                            plugins:
+                              items:
+                                properties:
+                                  cache:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  condition:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  direct:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  extProc:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  isDisabled:
+                                    type: boolean
+                                  jsonSchema:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  lua:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  name:
+                                    type: string
+                                  path:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  phase:
+                                    type: string
+                                  rateLimit:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                type: object
+                              type: array
+                            response:
+                              properties:
+                                direct:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            retry:
+                              properties:
+                                initialInterval:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                maxElapsedTime:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                maxInterval:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                maxRetries:
+                                  type: integer
+                                multiplier:
+                                  type: number
+                                retryOnServerErrors:
+                                  type: boolean
+                                statusCodes:
+                                  items:
+                                    type: integer
+                                  type: array
+                              type: object
+                            visibility:
+                              properties:
+                                enableRequestBody:
+                                  type: boolean
+                                enableRequestBodyMap:
+                                  type: boolean
+                                enableResponseBody:
+                                  type: boolean
+                                enableResponseBodyMap:
+                                  type: boolean
+                                excludeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                excludeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                includeAllRequestHeaders:
+                                  type: boolean
+                                includeAllResponseHeaders:
+                                  type: boolean
+                                includeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                includeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                          type: object
+                        kubernetes:
+                          properties:
+                            bearerToken:
+                              properties:
+                                fromSecret:
+                                  type: string
+                                trustedCAs:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            clientCertificate:
+                              properties:
+                                fromSecret:
+                                  type: string
+                                trustedCAs:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            kubeconfig:
+                              properties:
+                                context:
+                                  type: string
+                                fromSecret:
+                                  type: string
+                              type: object
+                          type: object
+                        llm:
+                          properties:
+                            auth:
+                              properties:
+                                basic:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                bearer:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                custom:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                oauth2ClientCredentials:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                sigv4:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            cors:
+                              properties:
+                                allowClusterServices:
+                                  type: boolean
+                                allowCredentials:
+                                  type: boolean
+                                allowHeaders:
+                                  type: string
+                                allowMethods:
+                                  type: string
+                                allowOriginStringMatch:
+                                  items:
+                                    type: string
+                                  type: array
+                                exposeHeaders:
+                                  type: string
+                                maxAge:
+                                  type: string
+                              type: object
+                            embedding:
+                              properties:
+                                dimensions:
+                                  type: integer
+                                model:
+                                  type: string
+                                source:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            header:
+                              properties:
+                                addRequestHeaders:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                addResponseHeaders:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                authorizationMode:
+                                  type: string
+                                forwardedMode:
+                                  type: string
+                                host:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                removeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                removeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            isUpstreamHTTP2:
+                              type: boolean
+                            limits:
+                              properties:
+                                maxEstimatedInputTokens:
+                                  type: integer
+                                maxOutputTokens:
+                                  type: integer
+                                maxRequestBytes:
+                                  type: integer
+                                maxStreamEventBytes:
+                                  type: integer
+                                maxToolSchemaBytes:
+                                  type: integer
+                                maxTools:
+                                  type: integer
+                              type: object
+                            listenHTTP2:
+                              type: boolean
+                            model:
+                              properties:
+                                eval:
+                                  type: string
+                                opa:
+                                  type: string
+                                value:
+                                  type: string
+                              type: object
+                            path:
+                              properties:
+                                addPrefix:
+                                  type: string
+                                removePrefix:
+                                  type: string
+                              type: object
+                            plugins:
+                              items:
+                                properties:
+                                  condition:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  direct:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  extProc:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  guardrail:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  isDisabled:
+                                    type: boolean
+                                  jsonSchema:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  lua:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  model:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  name:
+                                    type: string
+                                  path:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  phase:
+                                    type: string
+                                  prompt:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  rateLimit:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  reasoning:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  semanticCache:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  semanticRouter:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  tokenRateLimit:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  tools:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                type: object
+                              type: array
+                            protocol:
+                              type: string
+                            reasoning:
+                              properties:
+                                effort:
+                                  type: string
+                                eval:
+                                  type: string
+                                level:
+                                  type: string
+                                opa:
+                                  type: string
+                                tokenBudget:
+                                  type: integer
+                              type: object
+                            translation:
+                              properties:
+                                defaultMaxOutputTokens:
+                                  type: integer
+                                upstreamProtocol:
+                                  type: string
+                              type: object
+                            visibility:
+                              properties:
+                                enableRequestBody:
+                                  type: boolean
+                                enableRequestBodyMap:
+                                  type: boolean
+                                enableResponseBody:
+                                  type: boolean
+                                enableResponseBodyMap:
+                                  type: boolean
+                                excludeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                excludeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                includeAllRequestHeaders:
+                                  type: boolean
+                                includeAllResponseHeaders:
+                                  type: boolean
+                                includeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                includeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                          type: object
+                        mcp:
+                          properties:
+                            auth:
+                              properties:
+                                basic:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                bearer:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                custom:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                oauth2ClientCredentials:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                sigv4:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            cors:
+                              properties:
+                                allowClusterServices:
+                                  type: boolean
+                                allowCredentials:
+                                  type: boolean
+                                allowHeaders:
+                                  type: string
+                                allowMethods:
+                                  type: string
+                                allowOriginStringMatch:
+                                  items:
+                                    type: string
+                                  type: array
+                                exposeHeaders:
+                                  type: string
+                                maxAge:
+                                  type: string
+                              type: object
+                            disableOriginCheck:
+                              type: boolean
+                            endpoint:
+                              type: string
+                            header:
+                              properties:
+                                addRequestHeaders:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                addResponseHeaders:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                authorizationMode:
+                                  type: string
+                                forwardedMode:
+                                  type: string
+                                host:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                removeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                removeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            isUpstreamHTTP2:
+                              type: boolean
+                            limits:
+                              properties:
+                                maxRequestBytes:
+                                  type: integer
+                                maxStreamEventBytes:
+                                  type: integer
+                              type: object
+                            listenHTTP2:
+                              type: boolean
+                            path:
+                              properties:
+                                addPrefix:
+                                  type: string
+                                removePrefix:
+                                  type: string
+                              type: object
+                            plugins:
+                              items:
+                                properties:
+                                  condition:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  direct:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  extProc:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  guardrail:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  isDisabled:
+                                    type: boolean
+                                  jsonSchema:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  lua:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  name:
+                                    type: string
+                                  path:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  phase:
+                                    type: string
+                                  rateLimit:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                type: object
+                              type: array
+                            protocol:
+                              properties:
+                                rejectUnknownMethods:
+                                  type: boolean
+                                requireVersion:
+                                  type: boolean
+                                versions:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                            visibility:
+                              properties:
+                                disableRequestBody:
+                                  type: boolean
+                                disableResponseBody:
+                                  type: boolean
+                                excludeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                excludeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                includeAllRequestHeaders:
+                                  type: boolean
+                                includeAllResponseHeaders:
+                                  type: boolean
+                                includeRequestHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                                includeResponseHeaders:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                          type: object
+                        mysql:
+                          properties:
+                            auth:
+                              properties:
+                                password:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            authorization:
+                              properties:
+                                mode:
+                                  type: string
+                              type: object
+                            database:
+                              type: string
+                            isTLS:
+                              type: boolean
+                            user:
+                              type: string
+                            visibility:
+                              properties:
+                                disableQuery:
+                                  type: boolean
+                              type: object
+                          type: object
+                        name:
+                          type: string
+                        parent:
+                          type: string
+                        postgres:
+                          properties:
+                            auth:
+                              properties:
+                                password:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            authorization:
+                              properties:
+                                mode:
+                                  type: string
+                              type: object
+                            database:
+                              type: string
+                            sslMode:
+                              type: string
+                            user:
+                              type: string
+                            visibility:
+                              properties:
+                                disableQuery:
+                                  type: boolean
+                              type: object
+                          type: object
+                        rdp:
+                          properties:
+                            auth:
+                              properties:
+                                domain:
+                                  type: string
+                                password:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                user:
+                                  type: string
+                              type: object
+                            upstreamTLS:
+                              properties:
+                                allowAnyCert:
+                                  type: boolean
+                                pinnedCertSHA256:
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
+                          type: object
+                        socks5:
+                          properties:
+                            auth:
+                              properties:
+                                noAuth:
+                                  type: boolean
+                                usernamePassword:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            isEmbeddedMode:
+                              type: boolean
+                          type: object
+                        ssh:
+                          properties:
+                            auth:
+                              properties:
+                                password:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                privateKey:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                              type: object
+                            eSSHMode:
+                              type: boolean
+                            enableLocalPortForwarding:
+                              type: boolean
+                            enableSubsystem:
+                              type: boolean
+                            upstreamHostKey:
+                              properties:
+                                insecureIgnoreHostKey:
+                                  type: boolean
+                                key:
+                                  type: string
+                              type: object
+                            user:
+                              type: string
+                            visibility:
+                              properties:
+                                disableSessionRecording:
+                                  type: boolean
+                                enableSessionStdinRecording:
+                                  type: boolean
+                              type: object
+                          type: object
+                        tls:
+                          properties:
+                            appendToSystemPool:
+                              type: boolean
+                            clientCertificate:
+                              properties:
+                                fromSecret:
+                                  type: string
+                              type: object
+                            insecureSkipVerify:
+                              type: boolean
+                            trustedCAs:
+                              items:
+                                type: string
+                              type: array
+                          type: object
+                        upstream:
+                          properties:
+                            container:
+                              properties:
+                                args:
+                                  items:
+                                    type: string
+                                  type: array
+                                command:
+                                  items:
+                                    type: string
+                                  type: array
+                                credentials:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                env:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                image:
+                                  type: string
+                                livenessProbe:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                port:
+                                  type: integer
+                                readinessProbe:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                replicas:
+                                  type: integer
+                                resourceLimit:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                securityContext:
+                                  type: object
+                                  x-kubernetes-preserve-unknown-fields: true
+                                volumeMounts:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                                volumes:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                            loadbalance:
+                              properties:
+                                endpoints:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                            url:
+                              type: string
+                            user:
+                              type: string
+                          type: object
+                      type: object
+                    type: array
+                  rules:
+                    items:
+                      properties:
+                        condition:
+                          properties:
+                            all:
+                              properties:
+                                of:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                            any:
+                              properties:
+                                of:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                            match:
+                              type: string
+                            matchAny:
+                              type: boolean
+                            none:
+                              properties:
+                                of:
+                                  items:
+                                    type: object
+                                    x-kubernetes-preserve-unknown-fields: true
+                                  type: array
+                              type: object
+                            not:
+                              type: string
+                            opa:
+                              properties:
+                                inline:
+                                  type: string
+                              type: object
+                          type: object
+                        configName:
+                          type: string
+                        eval:
+                          type: string
+                        opa:
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              isAnonymous:
+                type: boolean
+              isDisabled:
+                type: boolean
+              isPublic:
+                type: boolean
+              isTLS:
+                type: boolean
+              mode:
+                type: string
+              port:
+                type: integer
+              region:
+                type: string
+            type: object
+          status:
+            properties:
+              conditions:
+                items:
+                  description: Condition contains details for one aspect of the current
+                    state of this API Resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        lastTransitionTime is the last time the condition transitioned from one status to another.
+                        This should be when the underlying condition changed.  If that is not known, then using the time when the API field changed is acceptable.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        message is a human readable message indicating details about the transition.
+                        This may be an empty string.
+                      maxLength: 32768
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        observedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      minimum: 0
+                      type: integer
+                    reason:
+                      description: |-
+                        reason contains a programmatic identifier indicating the reason for the condition's last transition.
+                        Producers of specific condition types may define expected values and meanings for this field,
+                        and whether the values are considered a guaranteed API.
+                        The value should be a CamelCase string.
+                        This field may not be empty.
+                      maxLength: 1024
+                      minLength: 1
+                      pattern: ^[A-Za-z]([A-Za-z0-9_,:]*[A-Za-z0-9_])?$
+                      type: string
+                    status:
+                      description: status of the condition, one of True, False, Unknown.
+                      enum:
+                      - "True"
+                      - "False"
+                      - Unknown
+                      type: string
+                    type:
+                      description: type of condition in CamelCase or in foo.example.com/CamelCase.
+                      maxLength: 316
+                      pattern: ^([a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*/)?(([A-Za-z0-9][-A-Za-z0-9_.]*)?[A-Za-z0-9])$
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - message
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              connectionEndpoint:
+                type: string
+              connectionKey:
+                type: string
+              connectionUID:
+                type: string
+              dataDigest:
+                type: string
+              externalUID:
+                type: string
+              lastSyncedMetadata:
+                additionalProperties:
+                  type: string
+                description: LastSyncedMetadata is the three-way merge base. It never
+                  contains a resource spec or Secret data.
+                type: object
+              observedGeneration:
+                format: int64
+                type: integer
+              upstreamStatus:
+                type: object
+                x-kubernetes-preserve-unknown-fields: true
+            type: object
+        required:
+        - octeliumRef
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

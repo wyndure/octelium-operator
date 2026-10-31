@@ -1,0 +1,4 @@
+resources:
+- v1_octelium.yaml
+- core_v1_octeliumnamespace.yaml
+# +kubebuilder:scaffold:manifestskustomizesamples

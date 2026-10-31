@@ -1,0 +1,10 @@
+/bin/
+/.tools/
+/.cache/
+/vendor/
+/dist/
+/coverage.out
+/cover.out
+/.aws/
+/.codex/
+/.agents/

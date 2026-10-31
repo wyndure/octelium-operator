@@ -1,0 +1,16 @@
+.git
+.github
+.aws
+.codex
+.agents
+.cache
+.tools
+bin
+vendor
+dist
+coverage.out
+cover.out
+deploy
+*.tar
+*.tar.gz
+*.zip
