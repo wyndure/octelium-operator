@@ -1,0 +1,18 @@
+apiVersion: core.octelium.wyndure.com/v1
+kind: OcteliumNamespace
+metadata:
+  name: engineering
+  namespace: octelium-system
+octeliumRef:
+  name: default
+metadataConfigMap: engineering-metadata
+spec:
+  attrs:
+    environment: production
+octelium:
+  reconciliationPolicy: Reconcile
+  deletionPolicy: Delete
+  metadata:
+    displayName: Engineering
+    labels:
+      team: engineering

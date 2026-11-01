@@ -1,0 +1,90 @@
+replicaCount: 1
+
+nameOverride: ""
+fullnameOverride: ""
+
+imagePullSecrets: []
+
+image:
+  repository: ghcr.io/wyndure/octelium-operator
+  tag: ""
+  digest: ""
+  pullPolicy: IfNotPresent
+
+rbac:
+  create: true
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+
+leaderElection:
+  enabled: true
+
+# Requires a SPIRE installation with the SPIFFE CSI driver and workload registration.
+# Disable when all Octelium connections explicitly use Insecure (plaintext, unauthenticated).
+spiffe:
+  enabled: true
+  csiDriver: csi.spiffe.io
+
+metrics:
+  enabled: false
+  port: 8080
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 65532
+  runAsGroup: 65532
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop: ["ALL"]
+
+resources:
+  requests:
+    cpu: 10m
+    memory: 64Mi
+  limits:
+    cpu: 100m
+    memory: 256Mi
+
+syncInterval: 30s
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: health
+  initialDelaySeconds: 15
+  periodSeconds: 20
+readinessProbe:
+  httpGet:
+    path: /readyz
+    port: health
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+podLabels: {}
+podAnnotations: {}
+
+extraArgs: []
+
+extraEnv: []
+extraEnvFrom: []
+
+extraInitContainers: []
+extraVolumes: []
+extraVolumeMounts: []
+
+nodeSelector: {}
+
+affinity: {}
+tolerations: []
+
+priorityClassName: ""
+
+terminationGracePeriodSeconds: 10

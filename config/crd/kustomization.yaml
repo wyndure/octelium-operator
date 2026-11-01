@@ -1,0 +1,15 @@
+resources:
+- bases/core.octelium.wyndure.com_octeliumclusterconfigs.yaml
+- bases/core.octelium.wyndure.com_octeliumconfigs.yaml
+- bases/core.octelium.wyndure.com_octeliumpolicies.yaml
+- bases/core.octelium.wyndure.com_octeliumidentityproviders.yaml
+- bases/core.octelium.wyndure.com_octeliumnamespaces.yaml
+- bases/core.octelium.wyndure.com_octeliumgroups.yaml
+- bases/core.octelium.wyndure.com_octeliumusers.yaml
+- bases/core.octelium.wyndure.com_octeliumservices.yaml
+- bases/core.octelium.wyndure.com_octeliumcredentials.yaml
+- bases/core.octelium.wyndure.com_octeliumsecrets.yaml
+- bases/core.octelium.wyndure.com_octeliumregions.yaml
+- bases/octelium.wyndure.com_octeliums.yaml
+# +kubebuilder:scaffold:crdkustomizeresource
+# +kubebuilder:scaffold:crdkustomizewebhookpatch

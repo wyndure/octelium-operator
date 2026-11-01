@@ -1,0 +1,13 @@
+apiVersion: v2
+
+type: application
+name: octelium-operator
+
+description: Translate Kubernetes custom resources into Octelium resources
+
+version: 0.47.0
+appVersion: "v0.47.0"
+kubeVersion: ">=1.30.0-0"
+
+annotations:
+  octelium.wyndure.com/upstream-version: v0.47.0

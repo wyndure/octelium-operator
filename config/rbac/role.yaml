@@ -1,0 +1,96 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: manager-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - core.octelium.wyndure.com
+  resources:
+  - octeliumclusterconfigs
+  - octeliumconfigs
+  - octeliumcredentials
+  - octeliumgroups
+  - octeliumidentityproviders
+  - octeliumnamespaces
+  - octeliumpolicies
+  - octeliumregions
+  - octeliumsecrets
+  - octeliumservices
+  - octeliumusers
+  verbs:
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - core.octelium.wyndure.com
+  resources:
+  - octeliumclusterconfigs/finalizers
+  - octeliumconfigs/finalizers
+  - octeliumcredentials/finalizers
+  - octeliumgroups/finalizers
+  - octeliumidentityproviders/finalizers
+  - octeliumnamespaces/finalizers
+  - octeliumpolicies/finalizers
+  - octeliumregions/finalizers
+  - octeliumsecrets/finalizers
+  - octeliumservices/finalizers
+  - octeliumusers/finalizers
+  verbs:
+  - update
+- apiGroups:
+  - core.octelium.wyndure.com
+  resources:
+  - octeliumclusterconfigs/status
+  - octeliumconfigs/status
+  - octeliumcredentials/status
+  - octeliumgroups/status
+  - octeliumidentityproviders/status
+  - octeliumnamespaces/status
+  - octeliumpolicies/status
+  - octeliumregions/status
+  - octeliumsecrets/status
+  - octeliumservices/status
+  - octeliumusers/status
+  verbs:
+  - get
+  - patch
+  - update
+- apiGroups:
+  - octelium.wyndure.com
+  resources:
+  - octeliums
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - octelium.wyndure.com
+  resources:
+  - octeliums/status
+  verbs:
+  - get
+  - patch
+  - update

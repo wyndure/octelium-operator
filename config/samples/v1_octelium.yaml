@@ -1,0 +1,9 @@
+apiVersion: octelium.wyndure.com/v1
+kind: Octelium
+metadata:
+  name: default
+  namespace: octelium-system
+spec:
+  endpoint: resource-server.example.com:8080
+  credentials:
+    type: Insecure # Plaintext and unauthenticated; use SPIFFE for mTLS.
