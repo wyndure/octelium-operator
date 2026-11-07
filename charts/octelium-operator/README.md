@@ -1,6 +1,6 @@
 # Octelium operator
 
-This chart installs the Octelium operator and its namespaced custom resource definitions. The controller watches resources across namespaces and uses each resource's `octeliumRef` to select its resource-server endpoint and credentials. This operator uses Octelium v0.47.0 APIs.
+This chart installs the Octelium operator and its namespaced custom resource definitions. The controller watches resources across namespaces and uses each resource's `octeliumRef` to select its resource-server endpoint and credentials. This operator uses Octelium v0.49.0 APIs.
 
 ## Install
 
@@ -10,7 +10,7 @@ Build and publish an operator image from this repository, then install with its 
 helm upgrade --install octelium-operator ./charts/octelium-operator \
   --namespace octelium-operator --create-namespace \
   --set image.repository=ghcr.io/wyndure/octelium-operator \
-  --set image.tag=latest
+  --set image.tag=v0.49.0
 ```
 
 The default repository is `ghcr.io/wyndure/octelium-operator`. The default image tag is the operator's `Chart.appVersion`, independently of the upstream Octelium version. The chart does not publish the image. Set `image.digest` to use an immutable digest instead of a tag.

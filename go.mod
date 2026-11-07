@@ -3,14 +3,13 @@ module github.com/wyndure/octelium-operator
 go 1.27.3
 
 require (
-	github.com/octelium/octelium/apis v0.42.1-0.20261024203258-aa90748749dc
-	github.com/octelium/octelium/client/common v0.0.0-20261024203258-aa90748749dc
-	github.com/octelium/octelium/cluster/apiserver v0.0.0-20261024203258-aa90748749dc
-	github.com/octelium/octelium/cluster/common v0.0.0-20261024203258-aa90748749dc
-	github.com/octelium/octelium/cluster/genesis v0.0.0-20261024203258-aa90748749dc
-	github.com/octelium/octelium/pkg v0.0.0-20261024203258-aa90748749dc
-	github.com/onsi/ginkgo/v2 v2.27.4
-	github.com/onsi/gomega v1.39.0
+	github.com/octelium/octelium/apis v0.42.1-0.20261101155145-962ca3e7459f
+	github.com/octelium/octelium/client/common v0.0.0-20261101155145-962ca3e7459f
+	github.com/octelium/octelium/cluster/apiserver v0.0.0-20261101155145-962ca3e7459f
+	github.com/octelium/octelium/cluster/common v0.0.0-20261101155145-962ca3e7459f
+	github.com/octelium/octelium/pkg v0.0.0-20261101155145-962ca3e7459f
+	github.com/onsi/ginkgo/v2 v2.31.0
+	github.com/onsi/gomega v1.42.0
 	github.com/spiffe/go-spiffe/v2 v2.8.1
 	google.golang.org/grpc v1.84.0
 	google.golang.org/protobuf v1.36.12
@@ -24,7 +23,7 @@ require (
 require (
 	cel.dev/cel-go v0.32.0 // indirect
 	cel.dev/expr v0.25.2 // indirect
-	github.com/Masterminds/semver/v3 v3.4.0 // indirect
+	github.com/Masterminds/semver/v3 v3.5.0 // indirect
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/agnivade/levenshtein v1.2.1 // indirect
 	github.com/antlr4-go/antlr/v4 v4.13.1 // indirect
@@ -36,12 +35,12 @@ require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.4.1 // indirect
 	github.com/emicklei/go-restful/v3 v3.13.0 // indirect
+	github.com/evanphx/json-patch v5.9.11+incompatible // indirect
 	github.com/evanphx/json-patch/v5 v5.9.11 // indirect
-	github.com/fatih/color v1.18.0 // indirect
+	github.com/fatih/color v1.19.0 // indirect
 	github.com/fsnotify/fsnotify v1.10.1 // indirect
 	github.com/fxamacker/cbor/v2 v2.9.1 // indirect
-	github.com/ghodss/yaml v1.0.0 // indirect
-	github.com/go-jose/go-jose/v4 v4.1.4 // indirect
+	github.com/go-jose/go-jose/v4 v4.1.6 // indirect
 	github.com/go-json-experiment/json v0.0.0-20260820222146-c27c302e5fc3 // indirect
 	github.com/go-logr/logr v1.4.4 // indirect
 	github.com/go-logr/zapr v1.3.0 // indirect
@@ -67,7 +66,7 @@ require (
 	github.com/gofrs/flock v0.13.0 // indirect
 	github.com/google/gnostic-models v0.7.1 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/pprof v0.0.0-20250403155104-27863c87afa6 // indirect
+	github.com/google/pprof v0.0.0-20260402051712-545e8a4df936 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/gorilla/css v1.0.1 // indirect
 	github.com/gosimple/slug v1.15.0 // indirect
@@ -90,11 +89,12 @@ require (
 	github.com/mattn/go-colorable v0.1.14 // indirect
 	github.com/mattn/go-isatty v0.0.20 // indirect
 	github.com/microcosm-cc/bluemonday v1.0.27 // indirect
+	github.com/miekg/dns v1.1.72 // indirect
 	github.com/mileusna/useragent v1.3.5 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
-	github.com/octelium/octelium/cluster/rscserver v0.0.0-20261024203258-aa90748749dc // indirect
+	github.com/octelium/octelium/cluster/rscserver v0.0.0-20261101155145-962ca3e7459f // indirect
 	github.com/open-policy-agent/opa v1.20.1 // indirect
 	github.com/oschwald/geoip2-golang/v2 v2.3.0 // indirect
 	github.com/oschwald/maxminddb-golang/v2 v2.5.0 // indirect
@@ -111,6 +111,7 @@ require (
 	github.com/spf13/cobra v1.10.2 // indirect
 	github.com/spf13/pflag v1.0.10 // indirect
 	github.com/tchap/go-patricia/v2 v2.3.3 // indirect
+	github.com/tidwall/gjson v1.19.0 // indirect
 	github.com/valyala/fastjson v1.6.10 // indirect
 	github.com/vektah/gqlparser/v2 v2.5.36 // indirect
 	github.com/x448/float16 v0.8.4 // indirect
@@ -132,12 +133,11 @@ require (
 	golang.org/x/text v0.41.0 // indirect
 	golang.org/x/time v0.15.0 // indirect
 	golang.org/x/tools v0.48.0 // indirect
-	gomodules.xyz/jsonpatch/v2 v2.4.0 // indirect
+	gomodules.xyz/jsonpatch/v2 v2.5.0 // indirect
 	google.golang.org/genproto/googleapis/api v0.0.0-20260819154853-08b0e4226688 // indirect
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20260819154853-08b0e4226688 // indirect
 	gopkg.in/evanphx/json-patch.v4 v4.13.0 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
-	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	k8s.io/apiextensions-apiserver v0.37.0 // indirect
 	k8s.io/klog/v2 v2.140.0 // indirect

@@ -2,20 +2,20 @@
 
 The Octelium operator manages Octelium resources through Kubernetes custom resources. It connects to a resource server using SPIFFE mTLS or explicitly unauthenticated plaintext gRPC and reconciles desired configuration through the upstream resource-management code used by `octeliumctl`.
 
-This version uses Octelium v0.47.0. Its Go modules are pinned to that release commit in `go.mod`.
+This version uses Octelium v0.49.0. Its Go modules are pinned to release commit `962ca3e7459f` in `go.mod`.
 
 ## Install
 
 Build and publish the operator image, then install the Helm chart:
 
 ```sh
-docker build -t ghcr.io/wyndure/octelium-operator:latest .
-docker push ghcr.io/wyndure/octelium-operator:latest
+docker build -t ghcr.io/wyndure/octelium-operator:v0.49.0 .
+docker push ghcr.io/wyndure/octelium-operator:v0.49.0
 
 helm upgrade --install octelium-operator ./charts/octelium-operator \
   --namespace octelium-operator --create-namespace \
   --set image.repository=ghcr.io/wyndure/octelium-operator \
-  --set image.tag=latest \
+  --set image.tag=v0.49.0 \
   --set spiffe.enabled=false
 ```
 
@@ -26,7 +26,7 @@ The operator manages resources across Kubernetes namespaces. Run one installatio
 A Kustomize installation is also available:
 
 ```sh
-make build-installer IMG=ghcr.io/wyndure/octelium-operator:latest
+make build-installer IMG=ghcr.io/wyndure/octelium-operator:v0.49.0
 
 kubectl apply --server-side -f dist/install.yaml
 ```
