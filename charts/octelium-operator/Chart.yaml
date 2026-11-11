@@ -5,9 +5,9 @@ name: octelium-operator
 
 description: Translate Kubernetes custom resources into Octelium resources
 
-version: 0.49.0
-appVersion: "v0.49.0"
+version: 0.50.0
+appVersion: "v0.50.0"
 kubeVersion: ">=1.30.0-0"
 
 annotations:
-  octelium.wyndure.com/upstream-version: v0.49.0
+  octelium.wyndure.com/upstream-version: v0.50.0
